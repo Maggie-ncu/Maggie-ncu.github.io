@@ -1,0 +1,97 @@
+<!DOCTYPE html>
+<html>
+<head>
+  <title>BMR 計算器</title>
+  <style>
+    body {
+      font-family: Arial, sans-serif;
+      background-color: #f4f4f4;
+    }
+
+    h1 {
+      text-align: center;
+      color: #333333;
+    }
+
+    .container {
+      max-width: 400px;
+      margin: 0 auto;
+      padding: 20px;
+      background-color: #ffffff;
+      border-radius: 5px;
+      box-shadow: 0 2px 5px rgba(0, 0, 0, 0.1);
+    }
+
+    label {
+      display: inline-block;
+      margin-bottom: 5px;
+      color: #333333;
+    }
+
+    input[type="number"] {
+      width: 100%;
+      padding: 8px;
+      border-radius: 3px;
+      border: 1px solid #cccccc;
+      box-sizing: border-box;
+    }
+
+    button {
+      display: block;
+      width: 100%;
+      padding: 10px;
+      margin-top: 10px;
+      background-color: #4caf50;
+      color: #ffffff;
+      border: none;
+      border-radius: 3px;
+      cursor: pointer;
+    }
+
+    #bmrResult {
+      margin-top: 20px;
+      font-weight: bold;
+      color: #333333;
+    }
+  </style>
+  <script>
+    function calculateBMR() {
+      var weight = document.getElementById("weight").value;
+      var height = document.getElementById("height").value;
+      var age = document.getElementById("age").value;
+      var gender = document.getElementById("gender").value;
+
+      if (weight && height && age) {
+        var bmr = 0;
+
+        if (gender === "male") {
+          bmr = 10 * weight + 6.25 * height - 5 * age + 5;
+        } else if (gender === "female") {
+          bmr = 10 * weight + 6.25 * height - 5 * age - 161;
+        }
+
+        bmr = bmr.toFixed(2); // 取小數點後兩位
+
+        document.getElementById("bmrResult").innerHTML = "您的 BMR 值為: " + bmr + " 大卡";
+      } else {
+        alert("請輸入有效的體重、身高和年齡");
+      }
+    }
+  </script>
+</head>
+<body>
+  <div class="container">
+    <h1>BMR 計算器</h1>
+    <label for="weight">體重 (公斤)：</label>
+    <input type="number" id="weight" /><br />
+    <label for="height">身高 (公分)：</label>
+    <input type="number" id="height" /><br />
+    <label for="age">年齡：</label>
+    <input type="number" id="age" /><br />
+    <label for="gender">性別：</label>
+    <select id="gender">
+      <option value="male">男性</option>
+      <option value="female">女性</option>
+    </select><br />
+    <button onclick="calculateBMR()">計算 BMR</button><br />
+<div id="bmrResult"></div>
